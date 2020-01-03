@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'XMLParser';
+  public selectedVal: string;
+  constructor() { }
+
+  ngOnInit() {
+    this.selectedVal ='upload';
+  } 
+
+  public onValChange(val: string) {
+    this.selectedVal = val;
+    console.log(val);
+  }
 }
