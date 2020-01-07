@@ -12,4 +12,14 @@ export class UploadComponent implements OnInit {
   ngOnInit() {
   }
 
+  public fileEvent(fileInput: any) {
+    console.log(fileInput);
+    const file = fileInput.target.files[0];
+    const fileName = file.name;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    console.log(formData);
+  }
 }

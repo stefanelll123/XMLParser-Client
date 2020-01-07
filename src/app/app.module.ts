@@ -18,7 +18,8 @@ import { UploadComponent } from './upload/upload.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

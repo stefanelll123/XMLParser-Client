@@ -1,3 +1,9 @@
 <div class="content-upload">
-    Content for content-upload
+  <div class="content">
+    <p class="file-name">File name</p>
+    <div class="upload-button-wrapper">
+      <button mat-raised-button class="button">UPLOAD XML</button>
+      <input type="file" id='avatar' (change)="fileEvent($event)" #fileInput>
+    </div>
+  </div>
 </div>
