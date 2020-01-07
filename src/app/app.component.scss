@@ -24,6 +24,19 @@
         width: 100%;
         mat-button-toggle {
             width: 50%;
+            color: #6202EE;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            text-align: center;
+            letter-spacing: 0.75px;
+            text-transform: uppercase;
         }
     }
+}
+
+.mat-tab {
+    width: 50%
 }

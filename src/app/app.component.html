@@ -4,17 +4,16 @@
     </div>
     <br>
     <mat-card>
-        <mat-button-toggle-group name="fontStyle" appearance="legacy" aria-label="Font Style" #group="matButtonToggleGroup" [value]="selectedVal" (change)="onValChange(group.value)">
-            <mat-button-toggle value="query">Query XML</mat-button-toggle>
-            <mat-button-toggle value="upload">Upload XML</mat-button-toggle>
-        </mat-button-toggle-group>
-
-        <app-query *ngIf="selectedVal === 'query'">
-        </app-query>
-
-        <app-upload *ngIf="selectedVal === 'upload' ">
-        </app-upload>
-
+        <mat-tab-group mat-stretch-tabs>
+            <mat-tab label="Query XML">
+                <app-query>
+                </app-query>
+            </mat-tab>
+            <mat-tab label="Upload XML">
+                <app-upload>
+                </app-upload>
+            </mat-tab>
+        </mat-tab-group>
     </mat-card>
 
 

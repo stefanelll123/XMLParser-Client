@@ -1,5 +1,5 @@
 .content-query {
-    padding: 100px;
+    padding: 50px;
     .content-query-title {
         font-family: Roboto;
         font-style: normal;
@@ -10,6 +10,10 @@
         margin-top: 15px;
         margin-bottom: 5px;
     }
+    .button-wrapper {
+        display: flex;
+        justify-content: center;
+    }
     mat-form-field {
         margin-top: 10px;
         width: 100%;
@@ -19,6 +23,9 @@
         padding: 31px 17px 31px 16px;
         display: flex;
         flex-direction: column;
+        overflow-y: hidden;
+        overflow-x: auto;
+        background: #FAFAFA;
         .result-item {
             display: table;
             height: 50px;
