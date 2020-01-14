@@ -1,3 +1,7 @@
+mat-card-content {
+    overflow: hidden;
+}
+
 .content-query {
     padding: 50px;
     .content-query-title {
@@ -23,8 +27,7 @@
         padding: 31px 17px 31px 16px;
         display: flex;
         flex-direction: column;
-        overflow-y: hidden;
-        overflow-x: auto;
+        overflow-y: auto;
         background: #FAFAFA;
         .result-img-title {
             display: flex;
@@ -63,4 +66,20 @@
 ::ng-deep.mat-tab-label.mat-tab-label-active.cdk-keyboard-focused:not(.mat-tab-disabled) {
     color: #6202EE;
     opacity: 1;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+ ::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

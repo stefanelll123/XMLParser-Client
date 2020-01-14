@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { XMLViewerDialogComponent } from './xml-viewer-dialog/xml-viewer-dialog.component';
+import { XMLHttpService } from '../services/xml-http.service';
+import { map } from 'rxjs/operators';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+
 @Component({
   selector: 'app-query',
   templateUrl: './query.component.html',
   styleUrls: ['./query.component.scss']
 })
+
 export class QueryComponent implements OnInit {
   hide = true;
   title;
   content;
-  items = [{name: "XML name 1", hide: true}, {name: "XML name 2", hide: false}, {name: "XML name 3", hide: false}, {name: "XML name 4", hide:true}]
-  constructor(public dialog: MatDialog) { }
+  items = []
+  constructor(public dialog: MatDialog, public httpService: XMLHttpService, public spinner: NgxSpinnerService) { }
 
   ngOnInit() {
   }
@@ -26,6 +31,14 @@ export class QueryComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result)
     });
+  }
+
+  makeRequest() {
+    console.log('A request has been made.');
+    this.httpService.getDocumentByTag('hello').subscribe((tag => {   
+      this.items = tag.docs;
+      return tag;}),
+      ); 
   }
 
 }
