@@ -4,15 +4,17 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatButtonToggleModule, MatLabel, MatInputModule, MatFormFieldModule, MatIconModule, MatButtonModule, MatTabsModule }  from "@angular/material";
+import { MatCardModule, MatButtonToggleModule, MatLabel, MatInputModule, MatFormFieldModule, MatIconModule, MatButtonModule, MatTabsModule, MatDialogModule }  from "@angular/material";
 import { QueryComponent } from './query/query.component';
 import { UploadComponent } from './upload/upload.component';
+import { XMLViewerDialogComponent } from './query/xml-viewer-dialog/xml-viewer-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QueryComponent,
     UploadComponent,
+    XMLViewerDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,9 +26,11 @@ import { UploadComponent } from './upload/upload.component';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [XMLViewerDialogComponent],
 })
 export class AppModule { }

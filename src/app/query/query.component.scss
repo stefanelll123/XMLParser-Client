@@ -26,12 +26,20 @@
         overflow-y: hidden;
         overflow-x: auto;
         background: #FAFAFA;
+        .result-img-title {
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+        }
         .result-item {
-            display: table;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             height: 50px;
             margin: 30px 0px 30px 0px;
         }
         .result-text {
+            justify-self: start;
             vertical-align: middle;
             font-family: Roboto;
             font-style: normal;
@@ -49,4 +57,10 @@
             padding-left: 15px;
         }
     }
+}
+
+::ng-deep.mat-tab-label.mat-tab-label-active:not(.mat-tab-disabled),
+::ng-deep.mat-tab-label.mat-tab-label-active.cdk-keyboard-focused:not(.mat-tab-disabled) {
+    color: #6202EE;
+    opacity: 1;
 }

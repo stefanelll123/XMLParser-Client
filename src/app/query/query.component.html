@@ -18,29 +18,18 @@
 
         <mat-card class="card-result">
             <mat-card-content>
-                <div class="result-item">
-                    <img src="../../assets/mock.svg" alt="mock-image">
-                    <span class="result-text">
-                        XML name 1
-                    </span>
-                </div>
-                <div class="result-item">
-                    <img src="../../assets/mock.svg" alt="mock-image">
-                    <span class="result-text">
-                        XML name 2
-                    </span>
-                </div>
-                <div class="result-item">
-                    <img src="../../assets/mock.svg" alt="mock-image">
-                    <span class="result-text">
-                        XML name 3
-                    </span>
-                </div>
-                <div class="result-item">
-                    <img src="../../assets/mock.svg" alt="mock-image">
-                    <span class="result-text">
-                        XML name 4
-                    </span>
+                <div class="result-item" *ngFor="let item of items">
+                    <div class="result-img-title">
+                        <img src="../../assets/mock.svg" alt="mock-image" class="xml-picture">
+                        <div class="result-text">
+                            {{item.name}}
+                        </div>
+                    </div>
+                    <button mat-icon-button matSuffix (click)="item.hide = !item.hide" [attr.aria-pressed]="item.hide" (click)="openDialog()">
+                            <mat-icon>
+                                {{item.hide ? 'visibility_off' : 'visibility'}}
+                            </mat-icon>
+                    </button>
                 </div>
             </mat-card-content>
         </mat-card>
