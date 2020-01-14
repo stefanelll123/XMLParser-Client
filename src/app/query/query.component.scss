@@ -1,0 +1,66 @@
+.content-query {
+    padding: 50px;
+    .content-query-title {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 28px;
+        color: #000000;
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+    .button-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+    mat-form-field {
+        margin-top: 10px;
+        width: 100%;
+    }
+    .card-result {
+        height: 335px;
+        padding: 31px 17px 31px 16px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: hidden;
+        overflow-x: auto;
+        background: #FAFAFA;
+        .result-img-title {
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+        }
+        .result-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 50px;
+            margin: 30px 0px 30px 0px;
+        }
+        .result-text {
+            justify-self: start;
+            vertical-align: middle;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 24px;
+            /* identical to box height, or 150% */
+            letter-spacing: 0.15px;
+            /* Black — High Emphasis */
+            color: rgba(0, 0, 0, 0.87);
+            mix-blend-mode: normal;
+            vertical-align: middle;
+            display: table-cell;
+            vertical-align: middle;
+            padding-left: 15px;
+        }
+    }
+}
+
+::ng-deep.mat-tab-label.mat-tab-label-active:not(.mat-tab-disabled),
+::ng-deep.mat-tab-label.mat-tab-label-active.cdk-keyboard-focused:not(.mat-tab-disabled) {
+    color: #6202EE;
+    opacity: 1;
+}

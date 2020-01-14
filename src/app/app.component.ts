@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   constructor() { }
 
   ngOnInit() {
-    this.selectedVal ='upload';
+    this.selectedVal ='query';
   } 
 
   public onValChange(val: string) {

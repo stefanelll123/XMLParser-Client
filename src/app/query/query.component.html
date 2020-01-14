@@ -1,3 +1,37 @@
-<div class="content-query">
-    Content for content-query
-</div>
+<mat-card-content>
+    <div class="content-query">
+        <div class="content-query-title">
+            Your query
+        </div>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="select where tag contains value and size > 7; ">
+            <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+
+        <div class="button-wrapper">
+            <button mat-raised-button color="primary">Query</button>
+        </div>
+
+        <div class="content-query-title">
+            Results
+        </div>
+
+        <mat-card class="card-result">
+            <mat-card-content>
+                <div class="result-item" *ngFor="let item of items">
+                    <div class="result-img-title">
+                        <img src="../../assets/mock.svg" alt="mock-image" class="xml-picture">
+                        <div class="result-text">
+                            {{item.name}}
+                        </div>
+                    </div>
+                    <button mat-icon-button matSuffix (click)="item.hide = !item.hide" [attr.aria-pressed]="item.hide" (click)="openDialog()">
+                            <mat-icon>
+                                {{item.hide ? 'visibility_off' : 'visibility'}}
+                            </mat-icon>
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</mat-card-content>

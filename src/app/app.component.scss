@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    .wrapper-title {
+    .wrapper-subtitle {
         margin-top: 40px;
         font-family: Roboto;
         font-style: normal;
@@ -17,13 +17,27 @@
     mat-card {
         margin-top: 30px;
         width: 70%;
-        min-height: 35%;
         padding: 0px;
+        margin-bottom: 30px;
+        max-width: 837px;
     }
     mat-button-toggle-group {
         width: 100%;
         mat-button-toggle {
             width: 50%;
+            color: #6202EE;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            text-align: center;
+            letter-spacing: 0.75px;
+            text-transform: uppercase;
         }
     }
+}
+
+.mat-tab {
+    width: 50%
 }
