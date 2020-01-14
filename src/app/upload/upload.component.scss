@@ -1,32 +1,36 @@
 .content-upload {
-  height: calc(100% - 36px);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .content {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
+    padding: 50px;
+    .content-upload-title {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 28px;
+        color: #000000;
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
 }
 
 .upload-button-wrapper {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-
-  margin-bottom: 15px;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-bottom: 15px;
 }
 
-
 .upload-button-wrapper input[type=file] {
-  width: 100%;
-  height: 36px;
-
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
+    width: 100%;
+    height: 36px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    pointer-events: stroke;
 }
