@@ -5,12 +5,14 @@
             Your query
         </div>
         <mat-form-field appearance="outline">
-            <input matInput placeholder="select where tag contains value and size > 7; ">
+        <input matInput placeholder="select where tag contains value and size > 7"
+            (change)="changeQuery($event)"
+            [ngClass]="{'wrong-input': invalidInput}">
             <mat-hint>Hint</mat-hint>
         </mat-form-field>
 
         <div class="button-wrapper">
-            <button mat-raised-button color="primary" (click)="makeRequest()">Query</button>
+            <button mat-raised-button color="primary" (click)="parseQuery()">Query</button>
         </div>
 
         <div class="content-query-title">
@@ -19,7 +21,6 @@
 
         <mat-card class="card-result">
             <mat-card-content>
-
                 <ngx-spinner bdOpacity=0.9 bdColor="#FAFAFA" size="medium" color="#6202EE" type="ball-clip-rotate" [fullScreen]="false">
                 </ngx-spinner>
 
