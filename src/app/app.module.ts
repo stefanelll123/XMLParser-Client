@@ -7,7 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule, MatButtonToggleModule, MatLabel, MatInputModule, MatFormFieldModule, MatIconModule, MatButtonModule, MatTabsModule, MatDialogModule }  from "@angular/material";
 import { QueryComponent } from './query/query.component';
 import { UploadComponent } from './upload/upload.component';
+<<<<<<< HEAD
 import { XMLViewerDialogComponent } from './query/xml-viewer-dialog/xml-viewer-dialog.component';
+=======
+import { HttpClientModule } from '@angular/common/http';
+>>>>>>> master
 
 @NgModule({
   declarations: [
@@ -22,12 +26,17 @@ import { XMLViewerDialogComponent } from './query/xml-viewer-dialog/xml-viewer-d
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonToggleModule,
+<<<<<<< HEAD
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatTabsModule,
     MatDialogModule,
+=======
+    MatButtonModule,
+    HttpClientModule
+>>>>>>> master
   ],
   providers: [],
   bootstrap: [AppComponent],

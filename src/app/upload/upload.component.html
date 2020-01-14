@@ -1,3 +1,10 @@
 <div class="content-upload">
-    Content for content-upload
+  <div class="content">
+  <p class="file-name">{{fileName}}</p>
+    <div class="upload-button-wrapper">
+      <button mat-raised-button class="button">Select File</button>
+      <input type="file" id='avatar' (change)="readSingleFile($event)" #fileInput>
+    </div>
+    <button mat-raised-button class="button" (click)="upload()">Upload</button>
+  </div>
 </div>
