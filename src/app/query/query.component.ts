@@ -19,11 +19,13 @@ export class QueryComponent implements OnInit {
   query: string = '';
   invalidInput = false;
 
-  regexQuery = new RegExp('(select where )(((tag [a-zA-Z]+ contains value [a-zA-Z]+ or )|(tree depth min [0-9]+ or )|(contains tag [a-zA-Z]+ or )|(size=[0-9]+ or ))*)((tag [a-zA-Z]+ contains value [a-zA-Z]+)|(tree depth min [0-9]+)|(contains tag [a-zA-Z]+)|(size=[0-9]+))');
+  regexQuery = new RegExp('(select where )(((tag [a-zA-Z]+ contains value [a-zA-Z]+ or )|(tree depth min [0-9]+ or )|(contains tag [a-zA-Z]+ or )|(size=[0-9]+ or )|(tag [a-zA-Z]+ contains child tag [a-zA-Z]+ or )|(attribute [a-zA-Z]+ has value [a-zA-Z0-9]+ or ))*)((tag [a-zA-Z]+ contains value [a-zA-Z]+)|(tree depth min [0-9]+)|(contains tag [a-zA-Z]+)|(size=[0-9]+)|(tag [a-zA-Z]+ contains child tag [a-zA-Z]+)|(attribute [a-zA-Z]+ has value [a-zA-Z0-9]+))');
   regexTagValue = new RegExp('tag [a-zA-Z]+ contains value [a-zA-Z]+');
   regexDepth = new RegExp('tree depth min [0-9]+');
   regexTag = new RegExp('contains tag [a-zA-Z]+');
   regexSize = new RegExp('size=[0-9]+');
+  regexTagTag = new RegExp('tag [a-zA-Z]+ contains child tag [a-zA-Z]+');
+  regexAttrValue = new RegExp('attribute [a-zA-Z]+ has value [a-zA-Z0-9]+');
 
   constructor(public dialog: MatDialog, public httpService: XMLHttpService, public spinner: NgxSpinnerService) { }
 
@@ -58,6 +60,14 @@ export class QueryComponent implements OnInit {
       if (this.regexSize.test(value)) {
         this.callSize(value);
       }
+
+      if (this.regexTagTag.test(value)) {
+        this.callTagTag(value);
+      }
+
+      if (this.regexAttrValue.test(value)) {
+        this.callAttrValue(value);
+      }
     });
   }
 
@@ -89,6 +99,22 @@ export class QueryComponent implements OnInit {
   callSize(query: string) {
     const params = query.split('=');
     this.httpService.getDocumentBySize(params[1]).subscribe(tag => {
+      this.addItem(tag['docs'], query);
+    });
+    console.log(params);
+  }
+
+  callTagTag(query: string) {
+    const params = query.split(' ');
+    this.httpService.getDocumentByTagUnderTag(params[1], params[5]).subscribe(tag => {
+      this.addItem(tag['docs'], query);
+    });
+    console.log(params);
+  }
+
+  callAttrValue(query: string) {
+    const params = query.split(' ');
+    this.httpService.getDocumentByAttrValue(params[1], params[4]).subscribe(tag => {
       this.addItem(tag['docs'], query);
     });
     console.log(params);
