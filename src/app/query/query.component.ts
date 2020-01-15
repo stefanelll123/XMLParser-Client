@@ -19,7 +19,7 @@ export class QueryComponent implements OnInit {
   query: string = '';
   invalidInput = false;
 
-  regexQuery = new RegExp('(select where )(((tag [a-zA-Z]+ contains value [a-zA-Z]+ and )|(tree depth min [0-9]+ and)|(contains tag [a-zA-Z]+ and )|(size=[0-9]+ and ))*)((tag [a-zA-Z]+ contains value [a-zA-Z]+)|(tree depth min [0-9]+)|(contains tag [a-zA-Z]+)|(size=[0-9]+))');
+  regexQuery = new RegExp('(select where )(((tag [a-zA-Z]+ contains value [a-zA-Z]+ or )|(tree depth min [0-9]+ or )|(contains tag [a-zA-Z]+ or )|(size=[0-9]+ or ))*)((tag [a-zA-Z]+ contains value [a-zA-Z]+)|(tree depth min [0-9]+)|(contains tag [a-zA-Z]+)|(size=[0-9]+))');
   regexTagValue = new RegExp('tag [a-zA-Z]+ contains value [a-zA-Z]+');
   regexDepth = new RegExp('tree depth min [0-9]+');
   regexTag = new RegExp('contains tag [a-zA-Z]+');
@@ -38,7 +38,7 @@ export class QueryComponent implements OnInit {
 
     this.items = [];
     const text =  this.query.substring(13);
-    const items = text.split('and');
+    const items = text.split('or');
 
     items.forEach(item => {
       const value = item.trim();
@@ -95,7 +95,6 @@ export class QueryComponent implements OnInit {
   }
 
   openDialog(item): void {
-    console.log(item)
     const dialogRef = this.dialog.open(XMLViewerDialogComponent, {
       width: '500px',
       height: '500px',
