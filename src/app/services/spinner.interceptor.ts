@@ -14,6 +14,8 @@ export class SpinnerInterceptor implements HttpInterceptor {
         this.spinner.show();
         return next.handle(request).pipe(tap(data => {
             this.spinner.hide();
+            console.log(data);
+            return data;
         }),catchError(err => {
             this.spinner.show();
             return throwError(err);

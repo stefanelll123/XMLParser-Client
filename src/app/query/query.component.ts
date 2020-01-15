@@ -12,7 +12,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 })
 
 export class QueryComponent implements OnInit {
-  hide = true;
+  hide = false;
   title;
   content;
   items = []
@@ -20,7 +20,6 @@ export class QueryComponent implements OnInit {
   query: string = '';
   invalidInput = false;
 
-  // tslint:disable-next-line: max-line-length
   regexQuery = new RegExp('(select where )(((tag [a-zA-Z]+ contains value [a-zA-Z]+ and )|(tree depth min [0-9]+ and)|(contains tag [a-zA-Z]+ and )|(size=[0-9]+ and ))*)((tag [a-zA-Z]+ contains value [a-zA-Z]+)|(tree depth min [0-9]+)|(contains tag [a-zA-Z]+)|(size=[0-9]+))');
   regexTagValue = new RegExp('tag [a-zA-Z]+ contains value [a-zA-Z]+');
   regexDepth = new RegExp('tree depth min [0-9]+');
@@ -38,6 +37,7 @@ export class QueryComponent implements OnInit {
       return;
     }
 
+    this.items = [];
     const text =  this.query.substring(13);
     const items = text.split('and');
 
@@ -64,29 +64,47 @@ export class QueryComponent implements OnInit {
 
   callTagValue(query: string) {
     const params = query.split(' ');
+    this.httpService.getDocumentWithWordBelowTag(params[1], params[4]).subscribe((tag => {
+      this.items = this.items.concat(tag["docs"]);
+        return tag;
+    }));
     console.log(params);
   }
 
   callDepth(query: string) {
     const params = query.split(' ');
-    console.log(params);
-  }
-
-  callTag(query: string) {
-    const params = query.split(' ');
-    this.httpService.getDocumentByTag(params[2]).subscribe((tag => {
-      this.items = tag.docs;
+    this.httpService.getDocumentByDepth(params[3]).subscribe((tag => {
+      this.items = this.items.concat(tag["docs"]);
+      console.log(this.items)
       return tag;
     }));
     console.log(params);
   }
 
-  callSize(query: string) {
-    const params = query.split('=');
+  callTag(query: string) {
+    const params = query.split(' ');
+    var _this = this;
+    this.httpService.getDocumentByTag(params[2]).subscribe((tag => {
+      this.items = this.items.concat(tag["docs"]);
+      return tag;
+    }));
+    console.log(this.items);
     console.log(params);
   }
 
-  openDialog(): void {
+  callSize(query: string) {
+    const params = query.split('=');
+    this.httpService.getDocumentBySize(params[1]).subscribe((tag => {
+      this.items = this.items.concat(tag["docs"]);
+      console.log(this.items)
+
+      return tag;
+    }));
+    console.log(params);
+  }
+
+  openDialog(item): void {
+    console.log(item)
     const dialogRef = this.dialog.open(XMLViewerDialogComponent, {
       width: '500px',
       height: '500px',
@@ -94,16 +112,8 @@ export class QueryComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      this.hide = this.hide ? false : true;
     });
-  }
-
-  makeRequest() {
-    console.log('A request has been made.');
-    this.httpService.getDocumentByTag('hello').subscribe((tag => {
-      this.items = tag.docs;
-      return tag;
-    }));
   }
 
   changeQuery(event) {

@@ -5,9 +5,7 @@
             Your query
         </div>
         <mat-form-field appearance="outline">
-        <input matInput placeholder="select where tag contains value and size > 7"
-            (change)="changeQuery($event)"
-            [ngClass]="{'wrong-input': invalidInput}">
+            <input matInput placeholder="select where tag contains value and size > 7" (change)="changeQuery($event)" [ngClass]="{'wrong-input': invalidInput}">
             <mat-hint>Hint</mat-hint>
         </mat-form-field>
 
@@ -20,32 +18,22 @@
         </div>
 
         <mat-card class="card-result">
-            <mat-card-content>
-                <ngx-spinner bdOpacity=0.9 bdColor="#FAFAFA" size="medium" color="#6202EE" type="ball-clip-rotate" [fullScreen]="false">
-                </ngx-spinner>
+            <ngx-spinner bdOpacity=0.9 bdColor="#FAFAFA" size="medium" color="#6202EE" type="ball-clip-rotate" [fullScreen]="false">
+            </ngx-spinner>
 
-                <div class="result-item" *ngFor="let item of items">
-                    <div class="result-img-title">
-                        <img src="../../assets/mock.svg" alt="mock-image" class="xml-picture">
-                        <div class="result-text">
-                            {{item.file_name}}
-                        </div>
+            <div class="result-item" *ngFor="let item of items">
+                <div class="result-img-title">
+                    <img src="../../assets/mock.svg" alt="mock-image" class="xml-picture">
+                    <div class="result-text">
+                        {{item.file_name}}
                     </div>
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-pressed]="hide" (click)="openDialog()">
+                </div>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-pressed]="hide" (click)="openDialog(item)">
             <mat-icon>
               {{hide ? 'visibility_off' : 'visibility'}}
             </mat-icon>
           </button>
-                </div>
-
-                <div class="no-query-has-been-made">
-
-                </div>
-
-                <div class="result-not-found" *ngIf="error">
-                    An error has occured!
-                </div>
-            </mat-card-content>
+            </div>
         </mat-card>
 
     </div>

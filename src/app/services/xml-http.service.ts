@@ -29,18 +29,18 @@ export class XMLHttpService {
       )
   }
 
-  getDocumentByTagSize(size, word): Observable<any> {
-    return this.http.get<any>(environment.url + '/elements', 
-      {params: {size: size, word: word}})
+  getDocumentWithWordBelowTag(tag_name, word): Observable<any> {
+    return this.http.get<any>(environment.url + '/search', 
+      {params: {tag_name: tag_name, word: word}})
       .pipe(
         retry(1),
         catchError(this.handleError)
       )
   }
-
-  getDocumentWithWordBelowTag(size): Observable<any> {
-    return this.http.get<any>(environment.url + '/search', 
-      {params: {tag_name: size}})
+  
+  getDocumentBySize(size): Observable<any> {
+    return this.http.get<any>(environment.url + '/elements', 
+      {params: {size: size}})
       .pipe(
         retry(1),
         catchError(this.handleError)

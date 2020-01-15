@@ -12,6 +12,7 @@ export class UploadComponent implements OnInit {
 
   fileUploaded: File;
   fileName: string = 'No file yet';
+  responseRequest: string = 'Waiting for the file...';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -45,9 +46,11 @@ export class UploadComponent implements OnInit {
   private sendMessage(uploadFileModel: UploadFileModel) {
     this.httpClient.post<UploadFileModel>(environment.url + 'upload_file', uploadFileModel)
       .subscribe(res => {
+        this.responseRequest = ` The file ${this.fileName} was uploaded successfully!`;
         console.log(res);
       },
       err => {
+        this.responseRequest = ` The file ${this.fileName} was not uploaded!`;
         console.log(err);
       });
   }
