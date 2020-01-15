@@ -83,7 +83,6 @@ export class QueryComponent implements OnInit {
       this.addItem(tag['docs'], query);
     });
     console.log(this.items);
-    console.log(params);
   }
 
   callSize(query: string) {
@@ -91,20 +90,20 @@ export class QueryComponent implements OnInit {
     this.httpService.getDocumentBySize(params[1]).subscribe(tag => {
       this.addItem(tag['docs'], query);
     });
-    console.log(params);
   }
 
   openDialog(item): void {
-    console.log(item)
-    const dialogRef = this.dialog.open(XMLViewerDialogComponent, {
-      width: '500px',
-      height: '500px',
-      data: {title: this.title, content: this.content}
+    this.httpService.getContentXML(item['path']).subscribe(content => {
+      const dialogRef = this.dialog.open(XMLViewerDialogComponent, {
+        width: '500px',
+        height: '500px',
+        data: {title: 'XML', content: content}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.hide = this.hide ? false : true;
+      });
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.hide = this.hide ? false : true;
-    });
   }
 
   changeQuery(event) {

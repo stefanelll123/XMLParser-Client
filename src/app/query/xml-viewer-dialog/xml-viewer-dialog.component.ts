@@ -13,11 +13,11 @@ export interface DialogData {
   templateUrl: './xml-viewer-dialog.component.html',
 })
 export class XMLViewerDialogComponent {
-
+  search: string = "title"
   constructor(
     public dialogRef: MatDialogRef<XMLViewerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-
+        console.log(data);
     }
 
   onNoClick(): void {

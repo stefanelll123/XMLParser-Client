@@ -20,6 +20,14 @@ export class XMLHttpService {
       )
   }
 
+  getContentXML(path): Observable<any> {
+    path = '/highlight?tag=title&_id=5e1f21c5cf70019994d2fb41' 
+    return this.http.get<any>(`${environment.url}${path}`).pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
   getDocumentByDepth(depth): Observable<any> {
     return this.http.get<any>(environment.url + '/depths', 
       {params: {depth: depth}})

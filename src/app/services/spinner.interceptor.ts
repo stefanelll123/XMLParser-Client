@@ -17,7 +17,7 @@ export class SpinnerInterceptor implements HttpInterceptor {
             console.log(data);
             return data;
         }),catchError(err => {
-            this.spinner.show();
+            // this.spinner.hide();
             return throwError(err);
         }));
     }

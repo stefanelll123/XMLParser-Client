@@ -63,9 +63,9 @@ mat-card-content {
 }
 
 .second-query {
-  color: #6202EE;
-  padding: 0;
-  margin: 0;
+    color: #6202EE;
+    padding: 0;
+    margin: 0;
 }
 
 ::ng-deep.mat-tab-label.mat-tab-label-active:not(.mat-tab-disabled),
@@ -90,8 +90,8 @@ mat-card-content {
     background: #555;
 }
 
-.wrong-input{
-  &::ng-deep {
-    color: red;
-  }
+.wrong-input {
+    &::ng-deep {
+        color: red;
+    }
 }

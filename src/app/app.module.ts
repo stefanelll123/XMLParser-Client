@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +20,12 @@ import { UploadComponent } from './upload/upload.component';
 import { XMLViewerDialogComponent } from './query/xml-viewer-dialog/xml-viewer-dialog.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { SpinnerInterceptor } from './services/spinner.interceptor'
+import { SpinnerInterceptor } from './services/spinner.interceptor';
+import { TrustHtmlPipe } from './trust-html.pipe';
+import { HighlightDirective } from './highlight.directive'
+
+import { NgHighlightModule } from 'ngx-text-highlight';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +33,8 @@ import { SpinnerInterceptor } from './services/spinner.interceptor'
     QueryComponent,
     UploadComponent,
     XMLViewerDialogComponent,
+    TrustHtmlPipe,
+    HighlightDirective,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +49,9 @@ import { SpinnerInterceptor } from './services/spinner.interceptor'
     MatDialogModule,
     MatButtonModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    HighlightModule,
+    NgHighlightModule
   ],
   bootstrap: [AppComponent],
   providers: [
