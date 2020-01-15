@@ -14,12 +14,15 @@ export class QueryComponent implements OnInit {
   hide = false;
   title;
   content;
-  items = []
+  items = [];
+
+  firstCheck = true;
 
   query: string = '';
   invalidInput = false;
 
-  regexQuery = new RegExp('(select where )(((tag [a-zA-Z]+ contains value [a-zA-Z]+ or )|(tree depth min [0-9]+ or )|(contains tag [a-zA-Z]+ or )|(size=[0-9]+ or )|(tag [a-zA-Z]+ contains child tag [a-zA-Z]+ or )|(attribute [a-zA-Z]+ has value [a-zA-Z0-9]+ or ))*)((tag [a-zA-Z]+ contains value [a-zA-Z]+)|(tree depth min [0-9]+)|(contains tag [a-zA-Z]+)|(size=[0-9]+)|(tag [a-zA-Z]+ contains child tag [a-zA-Z]+)|(attribute [a-zA-Z]+ has value [a-zA-Z0-9]+))');
+  regexOrQuery = new RegExp('(select where )(((tag [a-zA-Z]+ contains value [a-zA-Z]+ or )|(tree depth min [0-9]+ or )|(contains tag [a-zA-Z]+ or )|(size=[0-9]+ or )|(tag [a-zA-Z]+ contains child tag [a-zA-Z]+ or )|(attribute [a-zA-Z]+ has value [a-zA-Z0-9]+ or ))*)((tag [a-zA-Z]+ contains value [a-zA-Z]+)|(tree depth min [0-9]+)|(contains tag [a-zA-Z]+)|(size=[0-9]+)|(tag [a-zA-Z]+ contains child tag [a-zA-Z]+)|(attribute [a-zA-Z]+ has value [a-zA-Z0-9]+))');
+  regexAndQuery = new RegExp('(select where )(((tag [a-zA-Z]+ contains value [a-zA-Z]+ and )|(tree depth min [0-9]+ and )|(contains tag [a-zA-Z]+ and )|(size=[0-9]+ and )|(tag [a-zA-Z]+ contains child tag [a-zA-Z]+ and )|(attribute [a-zA-Z]+ has value [a-zA-Z0-9]+ and ))*)((tag [a-zA-Z]+ contains value [a-zA-Z]+)|(tree depth min [0-9]+)|(contains tag [a-zA-Z]+)|(size=[0-9]+)|(tag [a-zA-Z]+ contains child tag [a-zA-Z]+)|(attribute [a-zA-Z]+ has value [a-zA-Z0-9]+))');
   regexTagValue = new RegExp('tag [a-zA-Z]+ contains value [a-zA-Z]+');
   regexDepth = new RegExp('tree depth min [0-9]+');
   regexTag = new RegExp('contains tag [a-zA-Z]+');
@@ -33,89 +36,100 @@ export class QueryComponent implements OnInit {
   }
 
   public parseQuery() {
-    if (!this.regexQuery.test(this.query)) {
+    this.firstCheck = true;
+
+    if (this.query.indexOf(' or ') != -1) {
+      this.items = [];
+      this.parseOperationQuery('or');
+    } else {
+      this.items = [];
+      this.parseOperationQuery('and');
+    }
+  }
+
+  private parseOperationQuery(operation: string) {
+    if (!this.regexOrQuery.test(this.query)) {
       this.invalidInput = true;
       return;
     }
 
-    this.items = [];
     const text =  this.query.substring(13);
-    const items = text.split('or');
+    const items = text.split(operation);
 
     items.forEach(item => {
       const value = item.trim();
 
       if (this.regexTagValue.test(value)) {
-        this.callTagValue(value);
+        this.callTagValue(value, operation);
       }
 
       if (this.regexDepth.test(value)) {
-        this.callDepth(value);
+        this.callDepth(value, operation);
       }
 
       if (this.regexTag.test(value)) {
-        this.callTag(value);
+        this.callTag(value, operation);
       }
 
       if (this.regexSize.test(value)) {
-        this.callSize(value);
+        this.callSize(value, operation);
       }
 
       if (this.regexTagTag.test(value)) {
-        this.callTagTag(value);
+        this.callTagTag(value, operation);
       }
 
       if (this.regexAttrValue.test(value)) {
-        this.callAttrValue(value);
+        this.callAttrValue(value, operation);
       }
     });
   }
 
-  callTagValue(query: string) {
+  callTagValue(query: string, operation: string) {
     const params = query.split(' ');
     this.httpService.getDocumentWithWordBelowTag(params[1], params[4]).subscribe(tag => {
-      this.addItem(tag['docs'], query);
+      this.addItem(tag['docs'], query, operation);
     });
     console.log(params);
   }
 
-  callDepth(query: string) {
+  callDepth(query: string, operation: string) {
     const params = query.split(' ');
     this.httpService.getDocumentByDepth(params[3]).subscribe(tag => {
-      this.addItem(tag['docs'], query);
+      this.addItem(tag['docs'], query, operation);
     });
     console.log(params);
   }
 
-  callTag(query: string) {
+  callTag(query: string, operation: string) {
     const params = query.split(' ');
     this.httpService.getDocumentByTag(params[2]).subscribe(tag => {
-      this.addItem(tag['docs'], query);
+      this.addItem(tag['docs'], query, operation);
     });
     console.log(this.items);
     console.log(params);
   }
 
-  callSize(query: string) {
+  callSize(query: string, operation: string) {
     const params = query.split('=');
     this.httpService.getDocumentBySize(params[1]).subscribe(tag => {
-      this.addItem(tag['docs'], query);
+      this.addItem(tag['docs'], query, operation);
     });
     console.log(params);
   }
 
-  callTagTag(query: string) {
+  callTagTag(query: string, operation: string) {
     const params = query.split(' ');
     this.httpService.getDocumentByTagUnderTag(params[1], params[5]).subscribe(tag => {
-      this.addItem(tag['docs'], query);
+      this.addItem(tag['docs'], query, operation);
     });
     console.log(params);
   }
 
-  callAttrValue(query: string) {
+  callAttrValue(query: string, operation: string) {
     const params = query.split(' ');
     this.httpService.getDocumentByAttrValue(params[1], params[4]).subscribe(tag => {
-      this.addItem(tag['docs'], query);
+      this.addItem(tag['docs'], query, operation);
     });
     console.log(params);
   }
@@ -137,10 +151,32 @@ export class QueryComponent implements OnInit {
     this.query = event.srcElement.value;
   }
 
-  private addItem(addList, query: string) {
-    addList.forEach(item => {
-      item.query = query;
-      this.items.push(item);
+  private addItem(addList, query: string, operation: string) {
+    if (operation == 'or') {
+      addList.forEach(item => {
+        item.query = query;
+        this.items.push(item);
+      });
+      return;
+    }
+
+    if (this.firstCheck == true) {
+      this.items = this.items.concat(addList);
+      this.firstCheck = false;
+      return;
+    }
+
+    this.items = this.items.filter(value => this.isInCollection(addList, value));
+  }
+
+  private isInCollection(list, value) {
+    let result = false;
+    list.forEach(element => {
+      if (element._id == value._id) {
+        result = true;
+      }
     });
+
+    return result;
   }
 }
