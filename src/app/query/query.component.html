@@ -5,7 +5,7 @@
             Your query
         </div>
         <mat-form-field appearance="outline">
-            <input matInput placeholder="select where tag contains value and size > 7" (change)="changeQuery($event)" [ngClass]="{'wrong-input': invalidInput}">
+            <input matInput placeholder="select where tag hello contains value world and size=7" (change)="changeQuery($event)" [ngClass]="{'wrong-input': invalidInput}">
             <mat-hint>Hint</mat-hint>
         </mat-form-field>
 
@@ -26,6 +26,7 @@
                     <img src="../../assets/mock.svg" alt="mock-image" class="xml-picture">
                     <div class="result-text">
                         {{item.file_name}}
+                        <p class="second-query">{{item.query}}</p>
                     </div>
                 </div>
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-pressed]="hide" (click)="openDialog(item)">
