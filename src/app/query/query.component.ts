@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { XMLViewerDialogComponent } from './xml-viewer-dialog/xml-viewer-dialog.component';
 import { XMLHttpService } from '../services/xml-http.service';
-import { map } from 'rxjs/operators';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-query',
@@ -64,42 +63,34 @@ export class QueryComponent implements OnInit {
 
   callTagValue(query: string) {
     const params = query.split(' ');
-    this.httpService.getDocumentWithWordBelowTag(params[1], params[4]).subscribe((tag => {
-      this.items = this.items.concat(tag["docs"]);
-        return tag;
-    }));
+    this.httpService.getDocumentWithWordBelowTag(params[1], params[4]).subscribe(tag => {
+      this.addItem(tag['docs'], query);
+    });
     console.log(params);
   }
 
   callDepth(query: string) {
     const params = query.split(' ');
-    this.httpService.getDocumentByDepth(params[3]).subscribe((tag => {
-      this.items = this.items.concat(tag["docs"]);
-      console.log(this.items)
-      return tag;
-    }));
+    this.httpService.getDocumentByDepth(params[3]).subscribe(tag => {
+      this.addItem(tag['docs'], query);
+    });
     console.log(params);
   }
 
   callTag(query: string) {
     const params = query.split(' ');
-    var _this = this;
-    this.httpService.getDocumentByTag(params[2]).subscribe((tag => {
-      this.items = this.items.concat(tag["docs"]);
-      return tag;
-    }));
+    this.httpService.getDocumentByTag(params[2]).subscribe(tag => {
+      this.addItem(tag['docs'], query);
+    });
     console.log(this.items);
     console.log(params);
   }
 
   callSize(query: string) {
     const params = query.split('=');
-    this.httpService.getDocumentBySize(params[1]).subscribe((tag => {
-      this.items = this.items.concat(tag["docs"]);
-      console.log(this.items)
-
-      return tag;
-    }));
+    this.httpService.getDocumentBySize(params[1]).subscribe(tag => {
+      this.addItem(tag['docs'], query);
+    });
     console.log(params);
   }
 
@@ -119,5 +110,12 @@ export class QueryComponent implements OnInit {
   changeQuery(event) {
     this.invalidInput = false;
     this.query = event.srcElement.value;
+  }
+
+  private addItem(addList, query: string) {
+    addList.forEach(item => {
+      item.query = query;
+      this.items.push(item);
+    });
   }
 }
