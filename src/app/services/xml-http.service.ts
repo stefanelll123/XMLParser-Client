@@ -12,7 +12,7 @@ export class XMLHttpService {
   constructor(public http: HttpClient) { }
 
   getDocumentByTag(tagName): Observable<any> {
-    return this.http.get<any>(environment.url + '/tags', 
+    return this.http.get<any>(environment.url + '/tags',
       {params: {tag_name: tagName}})
       .pipe(
         retry(1),
@@ -21,7 +21,6 @@ export class XMLHttpService {
   }
 
   getContentXML(path): Observable<any> {
-    path = '/highlight?tag=title&_id=5e1f21c5cf70019994d2fb41' 
     return this.http.get<any>(`${environment.url}${path}`).pipe(
         retry(1),
         catchError(this.handleError)
@@ -29,7 +28,7 @@ export class XMLHttpService {
   }
 
   getDocumentByDepth(depth): Observable<any> {
-    return this.http.get<any>(environment.url + '/depths', 
+    return this.http.get<any>(environment.url + '/depths',
       {params: {depth: depth}})
       .pipe(
         retry(1),
@@ -38,17 +37,35 @@ export class XMLHttpService {
   }
 
   getDocumentWithWordBelowTag(tag_name, word): Observable<any> {
-    return this.http.get<any>(environment.url + '/search', 
+    return this.http.get<any>(environment.url + '/search',
       {params: {tag_name: tag_name, word: word}})
       .pipe(
         retry(1),
         catchError(this.handleError)
       )
   }
-  
+
   getDocumentBySize(size): Observable<any> {
-    return this.http.get<any>(environment.url + '/elements', 
+    return this.http.get<any>(environment.url + '/elements',
       {params: {size: size}})
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  getDocumentByTagUnderTag(parent, child): Observable<any> {
+    return this.http.get<any>(environment.url + '/elements',
+      {params: {parent: parent, child: child}})
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  getDocumentByAttrValue(attribute, value): Observable<any> {
+    return this.http.get<any>(environment.url + '/docs',
+      {params: {attribute: attribute, value: value}})
       .pipe(
         retry(1),
         catchError(this.handleError)

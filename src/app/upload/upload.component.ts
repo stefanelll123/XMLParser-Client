@@ -11,8 +11,8 @@ import { UploadFileModel } from './upload-file.model';
 export class UploadComponent implements OnInit {
 
   fileUploaded: File;
-  fileName: string = 'No file yet';
-  responseRequest: string = 'Waiting for the file...';
+  fileName: string = 'Select file';
+  responseRequest: string = '';
 
   constructor(private httpClient: HttpClient) { }
 

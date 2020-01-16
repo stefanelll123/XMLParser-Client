@@ -13,7 +13,9 @@ export class SpinnerInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.spinner.show();
         return next.handle(request).pipe(tap(data => {
-            this.spinner.hide();
+            setTimeout(() => {
+                this.spinner.hide();
+            },400);
             console.log(data);
             return data;
         }),catchError(err => {

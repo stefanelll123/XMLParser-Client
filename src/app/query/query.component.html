@@ -6,7 +6,7 @@
         </div>
         <mat-form-field appearance="outline">
             <input matInput placeholder="select where tag hello contains value world and size=7" (change)="changeQuery($event)" [ngClass]="{'wrong-input': invalidInput}">
-            <mat-hint>Hint</mat-hint>
+            <mat-hint>Query your collection with syntax</mat-hint>
         </mat-form-field>
 
         <div class="button-wrapper">
@@ -29,9 +29,9 @@
                         <p class="second-query">{{item.query}}</p>
                     </div>
                 </div>
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-pressed]="hide" (click)="openDialog(item)">
+                <button mat-icon-button matSuffix (click)="openDialog(item)">
             <mat-icon>
-              {{hide ? 'visibility_off' : 'visibility'}}
+              visibility
             </mat-icon>
           </button>
             </div>

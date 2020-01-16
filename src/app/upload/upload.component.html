@@ -1,16 +1,18 @@
 <mat-card-content>
-
     <div class="content-upload">
         <div class="content-upload-title">
-            Upload your file
+            Upload your XML file
         </div>
         <div class="content">
             <div class="upload-button-wrapper">
-                <button mat-raised-button color="primary">Select File</button>
+                <button mat-button>{{fileName}}</button>
                 <input type="file" id='avatar' (change)="readSingleFile($event)" #fileInput>
             </div>
             <button mat-raised-button color="primary" (click)="upload()">Upload</button>
         </div>
+
+        <ngx-spinner bdOpacity=0.9 bdColor="#FFF" size="medium" color="#6202EE" type="ball-clip-rotate" [fullScreen]="false">
+        </ngx-spinner>
 
         <div class="content-upload-subtitle">
             {{responseRequest}}
