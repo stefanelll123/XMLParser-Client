@@ -21,11 +21,6 @@ import { XMLViewerDialogComponent } from './query/xml-viewer-dialog/xml-viewer-d
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerInterceptor } from './services/spinner.interceptor';
-import { TrustHtmlPipe } from './trust-html.pipe';
-import { HighlightDirective } from './highlight.directive'
-
-import { NgHighlightModule } from 'ngx-text-highlight';
-
 
 @NgModule({
   declarations: [
@@ -33,9 +28,7 @@ import { NgHighlightModule } from 'ngx-text-highlight';
     QueryComponent,
     UploadComponent,
     XMLViewerDialogComponent,
-    TrustHtmlPipe,
-    HighlightDirective,
-  ],
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -50,8 +43,6 @@ import { NgHighlightModule } from 'ngx-text-highlight';
     MatButtonModule,
     HttpClientModule,
     NgxSpinnerModule,
-    HighlightModule,
-    NgHighlightModule
   ],
   bootstrap: [AppComponent],
   providers: [
