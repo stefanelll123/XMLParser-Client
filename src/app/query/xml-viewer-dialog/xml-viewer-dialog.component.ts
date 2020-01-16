@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export interface DialogData {
   title: string;
-  content: string;
+  content;
 }
 
 
@@ -14,10 +14,11 @@ export interface DialogData {
 })
 export class XMLViewerDialogComponent {
   search: string = "title"
+  content 
   constructor(
     public dialogRef: MatDialogRef<XMLViewerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-        console.log(data);
+      this.content = data.content.content;
     }
 
   onNoClick(): void {

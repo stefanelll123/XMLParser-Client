@@ -136,7 +136,7 @@ export class QueryComponent implements OnInit {
       const dialogRef = this.dialog.open(XMLViewerDialogComponent, {
         width: '600px',
         height: '450px',
-        data: {title: 'XML', content: content}
+        data: {content: content}
       });
       dialogRef.afterClosed().subscribe(result => {
         this.hide = this.hide ? false : true;
