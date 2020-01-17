@@ -21,6 +21,7 @@ import { XMLViewerDialogComponent } from './query/xml-viewer-dialog/xml-viewer-d
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerInterceptor } from './services/spinner.interceptor';
+import { SanitizeHtmlPipe } from './sanitize-html.pipe';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SpinnerInterceptor } from './services/spinner.interceptor';
     QueryComponent,
     UploadComponent,
     XMLViewerDialogComponent,
+    SanitizeHtmlPipe,
     ],
   imports: [
     BrowserModule,
